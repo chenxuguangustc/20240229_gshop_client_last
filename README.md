@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # shop-client-last-last-last-last
+=======
+# shop-client-last-last-last
+>>>>>>> d1ec750f27ef5d7a461250a79b69b860977d3fea
 
 ## Project setup
 ```

@@ -52,13 +52,6 @@
 export default {
   name: "Header",
 
-  // methods: {
-  //   search() {
-  //     // 编程式路由跳转
-  //     this.$router.push('/search')
-  //   }
-  // },
-
   data() {
     return {
       keyword: "",
