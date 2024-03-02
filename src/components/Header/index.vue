@@ -37,8 +37,9 @@
             type="text"
             id="autocomplete"
             class="input-error input-xxlarge"
-            v-model="keyword"
+            v-model.trim="keyword"
           />
+          <!-- .trim 用来去空格， -->
           <button class="sui-btn btn-xlarge btn-danger" @click.prevent="search">
             搜索
           </button>
@@ -63,13 +64,19 @@ export default {
       // 编程式路由导航
       // this.$router.push(`/search/${this.keyword}`)
 
-      this.$router.push({
+      // 这样定义
+      const location  = {
         name: "search",
-        params: { keyword: this.keyword },
-        query: {
+      }
+
+      // 只有有数据时，才携带params参数
+      if (this.keyword) {
+        location.params = { keyword: this.keyword },
+        location.query = {
           keyword2: this.keyword.toUpperCase()
         }
-      });
+      }
+      this.$router.push(location);
     },
   },
 };

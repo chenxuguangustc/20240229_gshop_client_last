@@ -11,9 +11,19 @@
 import Header from './components/Header'
 import Footer from '@/components/Footer'
 
+// 分别暴露用 { }这种方式
+import { reqBaseCategoryList } from "./api";
+
 export default {
   name: 'App',
 
+  // app里面发请求
+  mounted () {
+    // 异步获取三级分类列表
+    reqBaseCategoryList().then(result => {
+      
+    })
+  },
   components: {
     Header,
     Footer
