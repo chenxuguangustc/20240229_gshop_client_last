@@ -19,6 +19,7 @@ import Brand from "./Brand/Brand.vue";
 import Floor from "./Floor/Floor.vue";
 import Like from "./Like/Like.vue";
 import Rank from "./Rank/Rank.vue";
+import TypeNav from "@/components/TypeNav"
 
 export default {
   // components: { ListContainer, TodayRecommend },
@@ -34,6 +35,7 @@ export default {
     Floor,
     Like,
     Rank,
+    TypeNav
   },
 };
 </script>
