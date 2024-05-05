@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 // 向外暴露路由器对象
 export default new VueRouter({
     // 模式
-    mode: 'history', //不带#
+    mode: 'hash', //不带#
 
     // 应用中的所有路由
     routes,

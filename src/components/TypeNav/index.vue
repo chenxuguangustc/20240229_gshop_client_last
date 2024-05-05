@@ -13,15 +13,33 @@
         <a href="###">秒杀</a>
       </nav>
       <div class="sort">
-        <div class="all-sort-list2">          
+        <div class="all-sort-list2">
           <div class="sort">
             <div class="all-sort-list2" @click="toSearch">
               <div class="item" v-for="c1 in categoryList" :key="c1.categoryId">
-                <h3>
-                  <a href="javascript:" :data-categoryName="c1.categoryName"
-                    :data-category1Id="c1.categoryId">{{c1.categoryName}}</a>
-                  <!-- <a href="javascript:" @click="$router.push(`/search?categoryName=${c1.categoryName}&category1Id=${c1.categoryId}`)">{{c1.categoryName}}</a> -->
-                  <!-- <router-link :to="`/search?categoryName=${c1.categoryName}&category1Id=${c1.categoryId}`">{{c1.categoryName}}</router-link> -->
+                <h3>             
+                  <a
+                    href="javascript:"
+                    :data-categoryName="c1.categoryName"
+                    :data-category1Id="c1.categoryId"
+                    >{{ c1.categoryName }}</a
+                  >
+                  <!-- 编程式导航 -->
+                  <!-- <a
+                    href="javascript:"
+                    @click="
+                      $router.push(
+                        `/search?categoryName=${c1.categoryName}&category1Id=${c1.categoryId}`
+                      )
+                    "
+                    >{{ c1.categoryName }}</a
+                  > -->
+
+                  <!-- 声明式导航 -->
+                  <!-- <router-link
+                    :to="`/search?categoryName=${c1.categoryName}&category1Id=${c1.categoryId}`"
+                    >{{ c1.categoryName }}</router-link
+                  > -->
                 </h3>
                 <div class="item-list clearfix">
                   <div class="subitem">
@@ -31,13 +49,49 @@
                       :key="c2.categoryId"
                     >
                       <dt>
-                        <a href="javascript" :data-categoryName="c2.categoryName"
-                          :data-category2Id="c2.categoryId">{{ c2.categoryName }}</a>
+                        <!-- <a
+                          href="javascript"
+                          :data-catagoryName="c2.categoryName"
+                          :data-catagory2Id="c2.categoryId"
+                          >{{ c2.categoryName }}</a
+                        > -->
+
+                        <a
+                          href="javascript:"
+                          :data-categoryName="c2.categoryName"
+                          :data-category2Id="c2.categoryId"
+                          >{{ c2.categoryName }}</a
+                        >
+                        <!-- <a
+                          href="javascript"
+                          :data-categoryName="c2.categoryName"
+                          :data-category2Id="c2.categoryId"
+                          >{{ c2.categoryName }}</a
+                        > -->
+                        <!-- <router-link
+                          :to="`/search?categoryName=${c2.categoryName}&category2Id=${c2.categoryId}`"
+                          >{{ c2.categoryName }}</router-link
+                        > -->
                       </dt>
                       <dd>
                         <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
-                          <a href="javascript" :data-categoryName="c3.categoryName"
-                            :data-category3Id="c3.categoryId">{{ c3.categoryName }}</a>
+                          <!-- <a
+                            href="javascript:"
+                            :data-catagoryName="c3.categoryName"
+                            :data-catagory3Id="c3.categoryId"
+                            >{{ c3.categoryName }}</a
+                          > -->
+
+                          <a
+                            href="javascript:"
+                            :data-categoryName="c3.categoryName"
+                            :data-category3Id="c3.categoryId"
+                            >{{ c3.categoryName }}</a
+                          >
+                          <!-- <router-link
+                            :to="`/search?categoryName=${c3.categoryName}&category3Id=${c3.categoryId}`"
+                            >{{ c3.categoryName }}</router-link
+                          > -->
                         </em>
                       </dd>
                     </dl>
@@ -53,8 +107,8 @@
 </template>
 
 <script>
-import router from '@/router';
-import { mapState } from 'vuex';
+import router from "@/router";
+import { mapState } from "vuex";
 
 /* 
 1、dispatch()触发发请求的异步action调用 ==> 数据从后台接口请求到vuex的state中
@@ -72,44 +126,42 @@ export default {
     // ...mapState(['categoruList']), 但是这种写法适用于单模块编程
 
     ...mapState({
-      categoryList: state => state.home.baseCategoryList
-    })
+      categoryList: (state) => state.home.baseCategoryList,
+    }),
   },
 
   methods: {
-    toSearch (event) {
-      const target = event.target
+    toSearch(event) {
+      console.log(event);
+      const target = event.target;
+      console.log(target);
+      console.dir(target);
 
-      const dataset = event.target.dataset // 得到包含所有data处定义属性的对象
-      console.dir(dataset)
-      const {
-        categoryname,
-        category1id,
-        category2id,
-        category3id
-      } = dataset
+      const dataset = event.target.dataset; // 得到包含所有data处定义属性的对象
+      console.dir(dataset);
+      const { categoryname, category1id, category2id, category3id } = dataset;
       // 如果categoryname没值, 点击的不是分类项, 直接结束
-      if (!categoryname) return
+      if (!categoryname) return;
 
       // 准备query参数对象
       const query = {
-        categoryName: categoryname
-      }
+        categoryName: categoryname,
+      };
       if (category1id) {
-        query.category1Id = category1id
+        query.category1Id = category1id;
       } else if (category2id) {
-        query.category2Id = category2id
+        query.category2Id = category2id;
       } else if (category3id) {
-        query.category3Id = category3id
+        query.category3Id = category3id;
       }
 
       // 跳转
       this.$router.push({
-        name: 'search',
-        query
-      })
-    }
-  }
+        name: "search",
+        query,
+      });
+    },
+  },
 };
 </script>
 
@@ -223,7 +275,8 @@ export default {
             }
           }
 
-          &:hover {  // hover用于切换显示隐藏作用
+          &:hover {
+            // hover用于切换显示隐藏作用
             .item-list {
               display: block;
             }
